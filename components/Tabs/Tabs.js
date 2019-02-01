@@ -1,11 +1,19 @@
 
-class Tab {
-  constructor(){
-    
-  }
+class Tabs {
+  constructor(links){
+    //creates instances of tablink
+    this.links = links.forEach(link => new TabLink(link));
 
-  deselect(){
-
+    //goes thru links. Finds the link with selected class name
+    let selectedTab;
+    for(let i=0; i<links.length; i++){
+      let contains = links[i].classList.contains("tabs-link-selected");
+      if(contains){
+        selectedTab = links[i];
+        break;
+      }
+    }
+    console.log(selectedTab);
   }
 }
 
@@ -40,6 +48,10 @@ class TabLink {
     // Call the select method on the item associated with this link
     this.tabItem.select();
   }
+
+  deselect(){
+
+  }
 }
 
 class TabItem {
@@ -60,6 +72,10 @@ class TabItem {
     // Add a class named "tabs-item-selected" to this element
     this.element.classList.add("tabs-item-selected");
   }
+
+  deselect(){
+
+  }
 }
 
 
@@ -75,4 +91,4 @@ class TabItem {
 */
 
 let links = document.querySelectorAll(".tabs-link");
-links.forEach(link => new TabLink(link));
+let tabs = new Tabs(links);
